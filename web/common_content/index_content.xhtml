@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="my_style.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+                <div jsf:id="tabs_div" class="tabs">
+                    <ui:repeat value="#{indexBb.allMyMethod}" var="method" varStatus="i" begin="0">
+                        <h:commandLink value="#{method.kindName}" action="#{indexBb.setKind(method.kind)}" class="tab clickable" rendered="#{!indexBb.disabledTab[i.index]}">
+                            <f:ajax execute="@this" render="@all" listener="#{indexBb.disableTabClick(i.index)}"/>
+                        </h:commandLink>
+                        <h:outputText value="#{method.kindName}" rendered="#{indexBb.disabledTab[i.index]}" class="tab is_active"/>
+                    </ui:repeat>
+
+                    <div jsf:id="divId" class="tab_items">
+                        <ul class="tab_item">
+                            <ui:repeat value="#{indexBb.kindContent}" var="content">
+                                <li>
+                                    <h:link outcome="/logic_pages/#{content.link}?faces-redirect=true" styleClass="tab_item_link">#{content.jName}</h:link>
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </div>
+                </div>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

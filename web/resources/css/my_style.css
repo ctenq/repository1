@@ -1,0 +1,230 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2020/03/07, 16:30:20
+    Author     : araki
+*/
+
+@font-face{
+    font-family: "PixelMplus10-Regular";
+    src: url("./fonts/PixelMplus10-Regular.woff") format("woff");
+}
+
+@font-face{
+    font-family: "PixelMplus12-Regular";
+    src: url("./fonts/PixelMplus12-Regular.woff") format("woff");
+}
+
+.pixel_10{
+    font-family: "PixelMplus10-Regular";
+}
+
+.pixel_12{
+    font-family: "PixelMplus12-Regular";
+}
+
+/*header----------------------------------------------------------------------*/
+.header_link, .header_link:hover, .header_link:visited{
+    text-decoration: none;
+    color: black;
+}
+
+.header_div{
+    border-bottom: solid 5px #989898;
+    padding: 0px 5px 0px 5px;
+    display: flex;
+    align-items: center;
+}
+
+.header_image{
+    padding-left: 10px;
+    width: 75px;
+}
+
+.header_text{
+    font-family: "PixelMplus10-Regular";
+    margin: 0;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+/*sidebar---------------------------------------------------------------------*/
+.sidebar_in{
+    padding-left: 10px;
+}
+
+.prof_link{
+    height: 40px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.prof_form1{
+    display: flex;
+    align-items: center;
+}
+
+.twitter_link{
+    text-decoration: none;
+    padding-left: 10px;
+    clear: both;
+}
+
+.twitter_link:hover{
+    text-decoration: underline;
+}
+
+.image_back{
+    background-color: black;
+    border-radius: 10px;
+}
+
+.profile_image{
+    width: 40px;
+    border: solid 2px #333300;
+    border-radius: 10px;
+    float: left;
+    opacity: 1.0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.profile_image:hover{
+    opacity: 0.7;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.twitter_icon{
+    padding-top: 7px;
+    margin-left: 10px;
+    width: 40px;
+    opacity: 1.0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.twitter_icon:hover{
+    opacity: 0.7;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.pixiv_icon{
+    padding-top: 7px;
+    margin-left:10px;
+    width: 30px;
+    opacity: 1.0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.pixiv_icon:hover{
+    opacity: 0.7;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.current_updates{
+    font-family: "PixelMplus10-Regular";
+    font-size: 20px;
+    padding-top: 5px;
+    padding-left: 10px;
+    clear: both;
+    width: 90%;
+}
+
+.current_updates h4{
+    padding-top: 10px;
+    text-align: center;
+    margin-top: 0;
+}
+
+.current_updates_form{
+    background-color: #aee2d4;
+    border-radius: 10px;
+}
+
+/*content---------------------------------------------------------------------*/
+.tabs{
+    margin: 10px 0px 0px 30px;
+}
+
+.tab{
+    font-family: "PixelMplus10-Regular";
+    margin-right: 1px;
+    width: 100px;
+    height: 25px;
+    padding: 7px 5px 0px 5px;
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border: solid 1px #989898;
+    border-bottom: none;
+    font-weight: bold;
+}
+
+.clickable{
+    background-color: #bebebe;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+
+.clickable:hover{
+    background-color: #989898;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+
+.tab_items{
+    font-family: "PixelMplus10-Regular";
+    font-weight: lighter;
+}
+
+.tab_item{
+    background-color: white;
+    margin: 0px 300px 0px 0px;
+    border: solid 1px #989898;
+    padding: 5px 5px 5px 18px;
+    width: 500px;
+}
+
+.tab_item li{
+    margin: 5px 0px 5px 0px;
+    list-style-type: square;
+}
+
+.tab_item_link{
+    text-decoration: none;
+}
+
+.tab_item_link:hover{
+    text-decoration: underline;
+}
+
+.is_active{
+    background-color: #aee2d4;
+}
+
+.tab_item li{
+    list-style-position: inside;
+}
+
+/*footer----------------------------------------------------------------------*/
+.footer_div{
+    padding-left: 20px;
+}
+
+.footer_div_cr h3{
+    font-family: "PixelMplus10-Regular";
+    margin: 0;
+}
+
+.foote_div, h3{
+    
+}

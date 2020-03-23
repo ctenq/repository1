@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="logicStyle1">
+                <h:form>
+                    <h:panelGroup layout="block">
+                        <h4 class="pixel_12">
+                            N元連立一次方程式の解を求めるよ
+                        </h4>
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block">
+                        <div class="m_size inline">
+                            <h:commandLink action="#{mstlBb.reduce()}">
+                                <h:graphicImage library="images" name="left.png" class="direction_image"/>
+                                <f:ajax execute="@all" render="@form"/>
+                            </h:commandLink>
+                            <h:commandLink action="#{mstlBb.expand()}">
+                                <h:graphicImage library="images" name="right.png" class="direction_image"/>
+                                <f:ajax execute="@all" render="@form"/>
+                            </h:commandLink>
+                        </div>
+                        <h:commandButton value="計算" action="#{mstlBb.calc}" class="inline"/>
+                        <h:link outcome="/index.xhtml?faces-redirect=true" class="inline" style="margin-left: 15px">戻る</h:link>
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block">
+                        <table class="mstl_table">
+                            <ui:repeat value="#{mstlBb.coefs}" var="coef" begin="0" varStatus="i">
+                                <tr class="mstl_tr">
+                                    <c:forEach begin="0" end="#{mstlBb.size - 2}" varStatus="j">
+                                        <td class="mstl_x">
+                                            <h:inputText value="#{mstlBb.coefs[i.index][j.index]}" styleClass="input_small inline"
+                                                         onfocus="this.select()"/>
+                                            <p class="var_font inline">x</p>
+                                            <p class="index_small inline">#{j.index}</p>
+                                            <p class="inline">+</p>
+                                        </td>
+                                    </c:forEach>
+                                    <td class="mstl_x">
+                                        <h:inputText value="#{mstlBb.coefs[i.index][mstlBb.size - 1]}" styleClass="input_small inline"
+                                                     onfocus="this.select()"/>
+                                        <p class="var_font inline">x</p>
+                                        <p class="index_small inline">#{mstlBb.size - 1}</p>
+                                    </td>
+                                    <td class="mstl_const">
+                                        <p class="inline">&nbsp;=&nbsp;</p>
+                                        <h:inputText value="#{mstlBb.consts[i.index]}" styleClass="input_small inline"
+                                                     onfocus="this.select()"/>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+
+                        <h:panelGroup layout="block" rendered="#{mstlBb.viewAns}">
+                            <h:panelGroup layout="block" rendered="#{mstlBb.ans.b}">
+                                <p>多分答えは</p>
+                                <table class="mstl_ans">
+                                    <ui:repeat value="#{mstlBb.roundedAns}" var="k" begin="0" varStatus="l">
+                                        <tr>
+                                            <td>
+                                                <p class="var_font inline">x</p>
+                                                <p class="index_small inline">#{l.index}&nbsp;=&nbsp;</p>
+                                                <h:outputText value="#{k}" class="inline"/>
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>
+                                </table>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup layout="block" rendered="#{!mstlBb.ans.b}">
+                                <h:outputText value="#{mstlBb.ans.message}"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:form>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

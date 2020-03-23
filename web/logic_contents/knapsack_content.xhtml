@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="logicStyle1">
+                <h:panelGroup layout="block" styleClass="knapsack_div">
+                    <h:form>
+                        <h4 class="pixel_12">価値が最大になるようにナップサックに荷物を入れるよ</h4>
+                        <h:panelGrid columns="2">
+                            <h4>KnapSackの容量</h4>
+                            <h:inputText value="#{knapSackBb.knapsack}" styleClass="inputInt"
+                                         onfocus="this.select()">
+                                <f:ajax execute="@this" render="none"/>
+                            </h:inputText>
+                        </h:panelGrid>
+
+                        <h:commandButton value="荷物を追加" action="#{knapSackBb.addBaggage()}" styleClass="button">
+                            <f:ajax execute="@this" render="@all"/>
+                        </h:commandButton>
+                        
+                        <h:commandButton value="クリア" action="#{knapSackBb.clear()}" styleClass="button">
+                            <f:ajax execute="@this" render="@all"/>
+                        </h:commandButton>
+                        
+                        <h:commandButton value="計算" action="#{knapSackBb.calc()}" styleClass="button"/>
+                        <h:link outcome="/index.xhtml?faces-redirect=true">戻る</h:link>
+
+                        <table class="knapsack_table1">
+                            <tr>
+                                <th>荷物</th>
+                                <th>容量</th>
+                                <th>価値</th>
+                            </tr>
+                            <ui:repeat value="#{knapSackBb.bagList}" var="baggage" varStatus="i">
+                                <tr>
+                                    <td class="table_text">#{i.index + 1}</td>
+                                    <td>
+                                        <h:inputText value="#{baggage.volume}" styleClass="inputInt"
+                                                     onfocus="this.select()">
+                                            <f:ajax event="change" execute="@this" render="@none"/>
+                                        </h:inputText>
+                                    </td>
+                                    <td>
+                                        <h:inputText value="#{baggage.worth}" styleClass="inputInt"
+                                                     onfocus="this.select()">
+                                            <f:ajax event="change" execute="@this" render="@none"/>
+                                        </h:inputText>
+                                    </td>
+                                    <td>
+                                        <h:commandLink value="削除" action="#{knapSackBb.removeBaggage(baggage)}">
+                                            <f:ajax execute="@this" render="@all"/>
+                                        </h:commandLink>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+                    </h:form>
+
+
+                    <div jsf:id="knapsackdiv" rendered="#{knapSackBb.ans}">
+                        <hr/>
+                        <h:dataTable value="#{knapSackBb.selectedBags}" var="var" styleClass="knapsack_table2">
+                            <h:column>
+                                <f:facet name="header">荷物</f:facet>
+                                    #{var.number}
+                                <f:facet name="footer">#{knapSackBb.selectedBags.size()}/#{knapSackBb.bagList.size()}</f:facet>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">容量</f:facet>
+                                    #{var.volume}
+                                <f:facet name="footer">#{knapSackBb.sumBagsVolume}/#{knapSackBb.knapsack}</f:facet>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">価値</f:facet>
+                                    #{var.worth}
+                                <f:facet name="footer">#{knapSackBb.sumBagsWorth}/#{knapSackBb.sumAllBagsWorth}</f:facet>
+                            </h:column>
+                        </h:dataTable>
+                        <h4>を選ぶと多分価値が最大になるよ</h4><br/>
+                    </div>
+                </h:panelGroup>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

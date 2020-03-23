@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="logicStyle1">
+
+                <div class="l_description">
+                    <h:panelGroup layout="block" rendered="#{!labyrinthBb.viewAns}">
+                        <h:panelGroup layout="block" rendered="#{!labyrinthBb.view}">
+                            <h4 class="pixel_12">
+                                セルをクリックして迷路を作成してね
+                            </h4>
+                            <h:graphicImage library="images" name="wall.png" class="l_sampleImage"/>
+                            <p> : 壁</p>
+                            <h:graphicImage library="images" name="road.png" class="l_sampleImage"/>
+                            <p> : 道</p>
+                        </h:panelGroup>
+
+                        <h:panelGroup layout="block" rendered="#{labyrinthBb.view}">
+                            <h4 class="pixel_12">
+                                スタートとゴールを選択してね
+                            </h4>
+                            <h:graphicImage library="images" name="wall.png" class="l_sampleImage"/>
+                            <p> : 壁</p>
+                            <h:graphicImage library="images" name="road.png" class="l_sampleImage"/>
+                            <p> : 道</p>
+                            <h:graphicImage library="images" name="st_gl.png" class="l_sampleImage"/>
+                            <p> : スタート・ゴール</p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block" rendered="#{labyrinthBb.viewAns}">
+                        <h4 class="pixel_12">
+                            多分これが一番近いと思います
+                        </h4>
+                        <h:graphicImage library="images" name="wall.png" class="l_sampleImage"/>
+                        <p> : 壁</p>
+                        <h:graphicImage library="images" name="road.png" class="l_sampleImage"/>
+                        <p> : 道</p>
+                        <h:graphicImage library="images" name="st_gl.png" class="l_sampleImage"/>
+                        <p> : スタート・ゴール</p>
+                    </h:panelGroup>
+
+                    <h:form>
+                        <h:link outcome="/index.xhtml?faces-redirect=true">戻る</h:link>
+                    </h:form>
+                </div>
+
+                <div class="l_block">
+                    <h:form>
+                        <!--迷路作成時のサイズ拡張用-->
+                        <h:panelGroup layout="block" rendered="#{!labyrinthBb.view}">
+                            <div class="l_row">
+                                <h:commandLink action="#{labyrinthBb.removeRow()}">
+                                    <h:graphicImage library="images" name="up.png" class="direction_image"/>
+                                    <f:ajax execute="@this" render="@form"/>
+                                </h:commandLink>
+                                <br/>
+                                <h:commandLink action="#{labyrinthBb.addRow()}">
+                                    <h:graphicImage library="images" name="down.png" class="direction_image"/>
+                                    <f:ajax execute="@this" render="@form"/>
+                                </h:commandLink>
+                            </div>
+
+                            <div class="l_column">
+                                <h:commandLink action="#{labyrinthBb.removeColumn()}">
+                                    <h:graphicImage library="images" name="left.png" class="direction_image"/>
+                                    <f:ajax execute="@this" render="@form"/>
+                                </h:commandLink>
+                                <h:commandLink action="#{labyrinthBb.addColumn()}">
+                                    <h:graphicImage library="images" name="right.png" class="direction_image"/>
+                                    <f:ajax execute="@this" render="@form"/>
+                                </h:commandLink>
+                            </div>
+                        </h:panelGroup>
+
+                        <!--スタート、ゴール設定時（拡張不可）-->
+                        <h:panelGroup layout="block" rendered="#{labyrinthBb.view}">
+                            <div class="l_row">
+                                <h:graphicImage library="images" name="up.png" class="direction_image"/>
+                                <br/>
+                                <h:graphicImage library="images" name="down.png" class="direction_image"/>
+                            </div>
+
+                            <div class="l_column">
+                                <h:graphicImage library="images" name="left.png" class="direction_image"/>
+                                <h:graphicImage library="images" name="right.png" class="direction_image"/>
+                            </div>
+                        </h:panelGroup>
+
+
+
+                        <!--迷路作成用-->
+                        <!--二重配列の表示はui:repeat二回だと上手くいかない c:forEach二回だと
+                            今回は表示の反映が上手くいかない-->
+                        <h:panelGroup layout="block" rendered="#{!labyrinthBb.viewAns}">
+                            <h:panelGroup layout="block" rendered="#{!labyrinthBb.view}">
+                                <table class="l_table">
+                                    <ui:repeat value="#{labyrinthBb.field}" var="r" begin="0" varStatus="i">
+                                        <tr>
+                                            <c:forEach begin="0" end="#{labyrinthBb.column - 1}" varStatus="j">
+                                                <td>
+                                                    <h:commandLink action="#{labyrinthBb.switch_f(i.index, j.index)}">
+                                                        <h:graphicImage library="images" name="wall.png" class="wall_image" 
+                                                                        rendered="#{!labyrinthBb.field[i.index][j.index]}"/>
+                                                        <h:graphicImage library="images" name="road.png" class="road_image" 
+                                                                        rendered="#{labyrinthBb.field[i.index][j.index]}"/>
+                                                        <f:ajax execute="@this" render="@form"/>
+                                                    </h:commandLink>
+                                                </td>
+                                            </c:forEach>
+                                        </tr>
+                                    </ui:repeat>
+                                </table>
+                            </h:panelGroup>
+
+
+                            <!--スタート・ゴール設定用-->
+                            <h:panelGroup layout="block" rendered="#{labyrinthBb.view}">
+                                <table class="l_table">
+                                    <ui:repeat value="#{labyrinthBb.field}" var="r" begin="0" varStatus="i">
+                                        <tr>
+                                            <c:forEach begin="0" end="#{labyrinthBb.column - 1}" varStatus="j">
+                                                <td>
+                                                    <h:commandLink action="#{labyrinthBb.switch_sg(i.index, j.index)}" 
+                                                                   rendered="#{labyrinthBb.field[i.index][j.index]}">
+                                                        <h:graphicImage library="images" name="road.png" class="road_image" 
+                                                                        rendered="#{!labyrinthBb.st_gl_bool(i.index, j.index)}"/>
+                                                        <h:graphicImage library="images" name="st_gl.png" class="st_gl_image" 
+                                                                        rendered="#{labyrinthBb.st_gl_bool(i.index, j.index)}"/>
+                                                        <f:ajax execute="@this" render="@form"/>
+                                                    </h:commandLink>
+                                                    <h:graphicImage library="images" name="wall.png" class="wall_image" 
+                                                                    rendered="#{!labyrinthBb.field[i.index][j.index]}"/>
+                                                </td>
+                                            </c:forEach>
+                                        </tr>
+                                    </ui:repeat>
+                                </table>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+
+                        <h:panelGroup layout="block" rendered="#{labyrinthBb.viewAns}" styleClass="l_ans">
+                            <table class="l_table">
+                                <ui:repeat value="#{labyrinthBb.field}" var="r" begin="0" varStatus="i">
+                                    <tr>
+                                        <c:forEach begin="0" end="#{labyrinthBb.column - 1}" varStatus="j">
+                                            <td>
+                                                <h:panelGroup layout="brock" rendered="#{labyrinthBb.field[i.index][j.index]}">
+                                                    <h:graphicImage library="images" name="road.png" class="road_image" 
+                                                                    rendered="#{!labyrinthBb.route_bool(i.index, j.index)}"/>
+                                                    <h:graphicImage library="images" name="st_gl.png" class="st_gl_image" 
+                                                                    rendered="#{labyrinthBb.route_bool(i.index, j.index)}"/>
+                                                </h:panelGroup>
+                                                <h:graphicImage library="images" name="wall.png" class="wall_image" 
+                                                                rendered="#{!labyrinthBb.field[i.index][j.index]}"/>
+                                            </td>
+                                        </c:forEach>
+                                    </tr>
+                                </ui:repeat>
+                            </table>
+                        </h:panelGroup>
+                        
+                        <div class="l_bar"></div>
+
+                        <h:panelGroup layout="block">
+                            <h:commandButton value="もう一度" action="#{labyrinthBb.clear}" rendered="#{labyrinthBb.viewAns}">
+                                <f:ajax execute="@this" render="@all"/>
+                            </h:commandButton>
+                            <h:commandButton value="クリア" action="#{labyrinthBb.clear}" rendered="#{!labyrinthBb.viewAns}">
+                                <f:ajax execute="@this" render="@all"/>
+                            </h:commandButton>
+                            <br/>
+                        </h:panelGroup>
+
+                        <h:panelGroup layout="block" rendered="#{!labyrinthBb.viewAns}">
+                            <h:commandButton value="最短経路を検索" action="#{labyrinthBb.calc()}" 
+                                             rendered="#{labyrinthBb.calcButton}"><br/>
+                            </h:commandButton>
+                        </h:panelGroup>
+
+
+                        <!--迷路作成、スタート・ゴール設定の切り替え-->
+                        <h:panelGroup layout="block" rendered="#{!labyrinthBb.viewAns}">
+                            <h:commandLink action="#{labyrinthBb.switchView()}" rendered="#{!labyrinthBb.view}">
+                                スタートとゴールの設定
+                                <f:ajax execute="@this" render="@all"/>
+                            </h:commandLink>
+                            <h:commandLink action="#{labyrinthBb.switchView()}" rendered="#{labyrinthBb.view}">
+                                迷路の作成
+                                <f:ajax execute="@this" render="@all"/>
+                            </h:commandLink>
+                        </h:panelGroup>
+
+                    </h:form>
+                </div>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

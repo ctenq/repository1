@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>sidebar_right</title>
+        <h:outputStylesheet library="css" name="my_stylesheet.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:panelGroup layout="block" class="sidebar_in">
+                <div class="prof_link">
+                    <h:form class="prof_form1">
+                        <h:link outcome="/profile.xhtml?faces-redirect=true" styleClass="image_back">
+                            <h:graphicImage library="images" name="ctenq.png" styleClass="profile_image"/>
+                        </h:link>
+                        <h:outputLink value="https://twitter.com/ctenq" styleClass="twitter_link" target="_blank">
+                            @ctenq
+                        </h:outputLink>
+                        <h:outputLink value="https://twitter.com/ctenq" target="_blank">
+                            <h:graphicImage library="images" name="Twitter_Logo_Blue.png" styleClass="twitter_icon"/>
+                        </h:outputLink>
+                        <!--
+                        <h:outputLink value="" target="_blank">
+                            <h:graphicImage library="images" name="logo_icon_r.png" styleClass="pixiv_icon"/>
+                        </h:outputLink>
+                        -->
+                    </h:form>
+                </div>
+                <div class="current_updates">
+                    <h:form class="current_updates_form">
+                        <h4>最近追加された計算</h4>
+                        <h:dataTable value="" var="item">
+                            <column>
+                            </column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+            </h:panelGroup>
+        </ui:composition>
+    </h:body>
+</html>
+
