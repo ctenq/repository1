@@ -113,6 +113,21 @@ and open the template in the editor.
     transition-duration: 0.3s;
 }
 
+.github_icon{
+    padding-top: 7px;
+    margin-left:10px;
+    width: 30px;
+    opacity: 1.0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.github_icon:hover{
+    opacity: 0.7;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
 .pixiv_icon{
     padding-top: 7px;
     margin-left:10px;
