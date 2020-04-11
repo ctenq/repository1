@@ -37,4 +37,9 @@ public class ContentDb extends CatchDb{
         q.setParameter("valueOfKind", kind);
         return q.getResultList();
     }
+    
+    public List<Content> getRecentContentsFromDb(){
+        TypedQuery<Content> q = em.createNamedQuery(Content.QContentRegiTimeDesc, Content.class);
+        return q.getResultList();
+    }
 }

@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>sidebar_right</title>
         <h:outputStylesheet library="css" name="my_stylesheet.css"/>
@@ -34,10 +36,18 @@
                 <div class="current_updates">
                     <h:form class="current_updates_form">
                         <h4>最近追加された計算</h4>
-                        <h:dataTable value="" var="item">
-                            <column>
-                            </column>
-                        </h:dataTable>
+                        <div jsf:id="sideDivId" class="current_up_contents">
+                            <ul>
+                                <ui:repeat value="#{sidebarBb.recentContents}" var="content">
+                                    <li>
+                                        <h:link outcome="/logic_pages/#{content.link}?faces-redirect=true" styleClass="tab_item_link">
+                                            #{content.jName}
+                                        </h:link>
+                                        <h:outputText value="(#{sidebarBb.getDateString(content)})" style="text-align: right;"/>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </div>
                     </h:form>
                 </div>
             </h:panelGroup>

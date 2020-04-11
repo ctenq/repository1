@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic.algorithm;
+package logic.math;
 
 /**
  *
  * @author araki
  */
-public class Gcd {
-    public int gcd(int x, int y){
-        return (x % y == 0) ? y : gcd(y, x % y);
+public class Factorial {
+    public long factorial(long n){
+        if(n <= 1) return 1;
+        return n * factorial(n - 1);
     }
 }

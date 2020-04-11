@@ -10,7 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import logic.algorithm.Gcd;
+import logic.math.Gcd;
 
 /**
  *

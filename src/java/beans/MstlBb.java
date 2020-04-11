@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import logic.algorithm.Mstl;
-import logic.algorithm.Mstl_ans;
+import logic.math.Mstl;
+import logic.math.Mstl_ans;
 
 /**
  *

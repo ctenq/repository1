@@ -163,6 +163,16 @@ and open the template in the editor.
     border-radius: 10px;
 }
 
+.current_up_contents{
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+
+.current_up_contents li{
+    list-style-type: square;
+    margin: 5px 0px 5px 0px;
+}
+
 /*content---------------------------------------------------------------------*/
 .tabs{
     margin: 10px 0px 0px 30px;
@@ -212,6 +222,7 @@ and open the template in the editor.
 .tab_item li{
     margin: 5px 0px 5px 0px;
     list-style-type: square;
+    list-style-position: inside;
 }
 
 .tab_item_link{
@@ -224,10 +235,6 @@ and open the template in the editor.
 
 .is_active{
     background-color: #aee2d4;
-}
-
-.tab_item li{
-    list-style-position: inside;
 }
 
 /*footer----------------------------------------------------------------------*/

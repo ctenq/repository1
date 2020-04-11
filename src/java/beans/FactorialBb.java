@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import logic.algorithm.Factorial;
+import logic.math.Factorial;
 
 /**
  *
